@@ -6,7 +6,7 @@ logger = logging.getLogger('SayHelloWorld')
 
 class SayHelloWorld(luigi.Task):
     def output(self):
-        return luigi.LocalTarget('sample_report.csv')
+        return luigi.LocalTarget('sample_data/sample_report.csv')
     
     def run(self):
         out = 'Hello World'
@@ -19,5 +19,5 @@ class SayHelloWorld(luigi.Task):
             
 
 if __name__ == '__main__':
-    # python3 luigi_pipelines/hello_world.py
+    # python luigi_pipelines/hello_world.py
     luigi.run(['SayHelloWorld', '--local-scheduler'])
