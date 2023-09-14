@@ -57,13 +57,29 @@
 | 2. | `run()` | 1. Specify business logic | |
 | 3. | `requires()` | 1. Specify Dependencies | | 
 | 4. | `complete()` | Instead of using `output()` for target, you can use `complete()` | |
+| 5. | `Parameter()` | 1. Parameter() -> strings <br>2. IntParameter() -> integers <br>3. BoolParameter -> booleans | You can pass parameter to pipeline using command line or configuration file |
+| | | 1. DateParameter() <br>2. ListParameter() <br>3. DictParameter() | |
+| | | sample command line- <br> <code>python -m luigi --module main Final --<parameter> <param_value> --local-scheduler </code> | |
 | | | | |
 
 ### Step 3: Using luigi Configuration -
 
 | Id | Name | Description | Remarks |
 | :--- | :---: | --- | --- |
+| 1. | `Why to use Configuration file?` | Avoid many command line arguments -<br>1. Task Parameters <br>2. Core luigi behavior: log_level <br>3. Contrib packages requrires separate config: spark <br>4. work with more environments like dev, prod <br>5. can be edited and maintained in repo | |
+| 2. | `How to add Configuration file?` | 1. add luigi.cfg file <br>2. Set the LUIGI_CINFIG_PATH environment variable | |
 | | | | |
+
+### Step 4: luigi pipeline overview -
+
+| Id | Name | Description | Remarks |
+| :--- | :---: | --- | --- |
+| 1. | Starting a pipeline | 1. use different luigi.cfg file, like for dev -> luigi_dev.cfg and prod -> luigi_prod.cfg <br>2. use luigid locally  or luigid on another hosted server to run luigi pipeline | |
+| 2. | Scheduling a pipeline | 1. luigi has no in-built scheduler to schedule the pipeline <br>2. For linux/Mac use crontab <br>3. For Windows use Task Scheduler <br>4. Use Jenkins | |
+| 3. | Tracking pipeline progress | 1. use `set_progress_percentage` inside code <br>2. Set the number of luigi workers | |
+| 4. | Luigi alternatives | 1. Airflow <br>2. Mrjob (Targeted at hadoop clusters) <br>3. Oozie (Workflows in hadoop clusters) <br>4. Kubeflow (ML workflow) | |
+| | | | |
+
 ### Sample Luigi Code Snippets
 1. [hello_world.py](luigi_pipelines\hello_world.py): basic sample luigi task
 2. [task_dependencies.py](luigi_pipelines\task_dependencies.py): Get Task Dependencies exaples
